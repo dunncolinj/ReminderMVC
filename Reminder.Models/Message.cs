@@ -1,30 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Reminder.Data
+namespace Reminder.Models
 {
-    public class Message
+    class Message
     {
-        [Key]
         public int Id { get; set; }
-        [Required]
-        [ForeignKey(nameof(RelationshipId))]
         public int RelationshipId { get; set; }
-        public virtual Relationship Relationship { get; set; }
-        [Required]
+        [Display(Name="Sent Date/Time")]
         public DateTime WhenSent { get; set; }
-        [Required]
+        [Display(Name ="Subject")]
         public string Subject { get; set; }
-        [Required]
+        [Display(Name ="Message Text")]
         public string MessageText { get; set; }
         // byte array non-nullable - stuff with default image when creating
-        [Required]
+        [Display(Name = "Image")]
         public byte[] Image { get; set; }
+        [Display(Name ="Read Date/Time")]
         public DateTime? WhenRead { get; set; }
     }
 }

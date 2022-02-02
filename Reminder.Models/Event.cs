@@ -1,26 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Reminder.Data
+namespace Reminder.Models
 {
     public class Event
     {
-        [Key]
         public int Id { get; set; }
-        [Required]
-        [ForeignKey(nameof(RelationshipId))]
         public int RelationshipId { get; set; }
-        public virtual Relationship Relationship { get; set; }
-        [Required]
+        [Display(Name="Relationship")]
+        public Relationship Relationship { get; set; }
+        [Display(Name="Date of Event")]
         public DateTime Date { get; set; }
-        [Required]
+        [Display(Name ="Description")]
         public string Description { get; set; }
-        [Required]
+        [Display(Name ="Notify How Long Before?")]
         public DateTimeOffset NotifyBefore { get; set; }
     }
 }
