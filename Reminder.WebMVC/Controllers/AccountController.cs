@@ -152,7 +152,7 @@ namespace Reminder.WebMVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, FirstName=model.FirstName, MiddleName = model.MiddleName, LastName=model.LastName, BirthDate=model.BirthDate, Gender=model.Gender, Photo=model.Photo, PhoneNumber=model.PhoneNumber, Address=model.Address, City=model.City, State=model.State, Zip=model.Zip };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -172,6 +172,16 @@ namespace Reminder.WebMVC.Controllers
             // If we got this far, something failed, redisplay form
             return View(model);
         }
+
+        //
+        // POST: /Account/Update
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Update(RegisterViewModel model)
+        {
+            return View(model);
+        }
+
 
         //
         // GET: /Account/ConfirmEmail

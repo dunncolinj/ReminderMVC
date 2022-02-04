@@ -1,20 +1,18 @@
-﻿using System;
+﻿using Reminder.Data;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Reminder.Models
+namespace Reminder.Models.Relationships
 {
-    public class Relationship
+    class RelationshipEdit
     {
         public int Id { get; set; }
         public Guid User { get; set; }
         public Guid RelatedUser { get; set; }
-        [Display(Name="Type of Relationship")]
-        public Relationship HowRelated { get; set; }
-        [Display(Name ="Connection Accepted?")]
+        public RelationshipType HowRelated { get; set; }
         public bool Connected { get; set; }
     }
 }

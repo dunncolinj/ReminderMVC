@@ -54,14 +54,29 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Event.cs" />
-    <Compile Include="Message.cs" />
+    <Compile Include="Event\EventCreate.cs" />
+    <Compile Include="Event\EventDelete.cs" />
+    <Compile Include="Event\EventEdit.cs" />
+    <Compile Include="Event\EventList.cs" />
+    <Compile Include="Message\MessageCreate.cs" />
+    <Compile Include="Message\MessageDelete.cs" />
+    <Compile Include="Message\MessageDetails.cs" />
+    <Compile Include="Message\MessageList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Relationship.cs" />
+    <Compile Include="Relationship\RelationshipCreate.cs" />
+    <Compile Include="Relationship\RelationshipDelete.cs" />
+    <Compile Include="Relationship\RelationshipEdit.cs" />
+    <Compile Include="Relationship\RelationshipList.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Reminder.Data\Reminder.Data.csproj">
+      <Project>{0E043785-0180-450D-B625-7BF32E53AF5E}</Project>
+      <Name>Reminder.Data</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

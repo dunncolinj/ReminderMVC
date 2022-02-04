@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using Reminder.Data;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Reminder.WebMVC.Models
@@ -64,7 +66,18 @@ namespace Reminder.WebMVC.Models
 
     public class RegisterViewModel
     {
-        [Required]
+        [Required(ErrorMessage = "{0} is a required field.")]
+        [Display(Name = "First Name")]
+        public string FirstName { get; set; }
+
+        [Display(Name = "Middle Name")]
+        public string MiddleName { get; set; }
+
+        [Required(ErrorMessage = "{0} is a required field.")]
+        [Display(Name = "Last Name")]
+        public string LastName { get; set; }
+
+        [Required(ErrorMessage = "{0} is a required field.")]
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
@@ -79,6 +92,41 @@ namespace Reminder.WebMVC.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        [Required(ErrorMessage = "{0} is a required field.")]
+        [Display(Name = "Phone Number")]
+        public string PhoneNumber { get; set; }
+
+        [Display(Name = "Gender")]
+        public Genders? Gender { get; set; }
+
+        [Required(ErrorMessage = "{0} is a required field.")]
+        [Range(typeof(DateTime), "01/01/1900", "02/24/2022", ErrorMessage = "Valid dates are between {1} and {2}")]
+        [Display(Name = "Birth Date")]
+
+        public DateTime BirthDate { get; set; }
+
+        [Required]
+        [Display(Name = "Photo")]
+        public byte[] Photo { get; set; }
+
+        [Required(ErrorMessage = "{0} is a required field.")]
+        [Display(Name = "Address")]
+        public string Address { get; set; }
+        
+        [Required(ErrorMessage = "{0} is a required field.")]
+        [Display(Name = "City")]
+        public string City { get; set; }
+
+        [Required(ErrorMessage = "{0} is a required field.")]
+        [StringLength(2, ErrorMessage = "The {0} must be {1} characters long.", MinimumLength = 2)]
+        [Display(Name = "State")]
+        public string State { get; set; }
+
+        [Required]
+        [Display(Name = "ZIP Code")]
+        [StringLength(10, ErrorMessage ="The {0} must be between {2} and {1} characters long.", MinimumLength = 5)]
+        public string Zip { get; set; }
     }
 
     public class ResetPasswordViewModel
