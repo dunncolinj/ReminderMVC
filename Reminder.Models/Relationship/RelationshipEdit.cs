@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Reminder.Models.Relationships
 {
-    class RelationshipEdit
+    public class RelationshipEdit
     {
         public int Id { get; set; }
         public Guid User { get; set; }

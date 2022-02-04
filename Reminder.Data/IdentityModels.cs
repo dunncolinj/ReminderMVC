@@ -59,17 +59,17 @@ namespace Reminder.Data
             return new ApplicationDbContext();
         }
 
-        public System.Data.Entity.DbSet<Reminder.Models.EventList> EventLists { get; set; }
+        //public System.Data.Entity.DbSet<Reminder.Data.EventList> EventLists { get; set; }
 
-        public System.Data.Entity.DbSet<Reminder.Data.Relationship> Relationships { get; set; }
+        //public System.Data.Entity.DbSet<Reminder.Data.Relationship> Relationships { get; set; }
 
-        public System.Data.Entity.DbSet<Reminder.Models.MessageList> MessageLists { get; set; }
+        //public System.Data.Entity.DbSet<Reminder.Data.MessageList> MessageLists { get; set; }
 
         // DbSet statements go here
-        // public DbSet<UserProfile> UserProfiles { get; set; }
-        // public DbSet<Relationship> Relationships { get; set; }
-        // public DbSet<Events> Events { get; set; }
-        // public DbSet<Messages> Messages { get; set; }
+        
+        public DbSet<Relationship> Relationships { get; set; }
+        public DbSet<Event> Events { get; set; }
+        public DbSet<Message> Messages { get; set; }
     }
 
     public class IdentityUserLoginConfiguration : EntityTypeConfiguration<IdentityUserLogin>
