@@ -59,6 +59,12 @@ namespace Reminder.Data
             return new ApplicationDbContext();
         }
 
+        public System.Data.Entity.DbSet<Reminder.Models.EventList> EventLists { get; set; }
+
+        public System.Data.Entity.DbSet<Reminder.Data.Relationship> Relationships { get; set; }
+
+        public System.Data.Entity.DbSet<Reminder.Models.MessageList> MessageLists { get; set; }
+
         // DbSet statements go here
         // public DbSet<UserProfile> UserProfiles { get; set; }
         // public DbSet<Relationship> Relationships { get; set; }

@@ -11,7 +11,7 @@ namespace Reminder.Models.Relationships
     {
         public int Id { get; set; }
         public Guid User { get; set; }
-        public Guid RelatedUser { get; set; }
+        public string RelatedUser { get; set; }
         public RelationshipType HowRelated { get; set; }
         public bool Connected { get; set; }
     }

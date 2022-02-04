@@ -14,11 +14,10 @@ namespace Reminder.Data
         [Key]
         public int Id { get; set; }
         [Required]
-        [ForeignKey(nameof(User))]
         public Guid User { get; set; }
-        [ForeignKey(nameof(RelatedUser))]
+        [ForeignKey(nameof(ApplicationUser))]
         [Required]
-        public Guid RelatedUser { get; set; }
+        public string RelatedUser { get; set; }
         public virtual ApplicationUser ApplicationUser { get; set; }
         [Required]
         public RelationshipType HowRelated { get; set; }
