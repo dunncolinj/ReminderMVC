@@ -70,6 +70,17 @@ namespace Reminder.Data
         public DbSet<Relationship> Relationships { get; set; }
         public DbSet<Event> Events { get; set; }
         public DbSet<Message> Messages { get; set; }
+
+//       public System.Data.Entity.DbSet<Reminder.Models.Event.EventDetails> EventDetails { get; set; }
+//       public System.Data.Entity.DbSet<Reminder.Models.EventCreate> EventCreates { get; set; }
+//       public System.Data.Entity.DbSet<Reminder.Models.EventUpdate> EventUpdates { get; set; }
+//       public System.Data.Entity.DbSet<Reminder.Models.EventDelete> EventDeletes { get; set; }
+//       public System.Data.Entity.DbSet<Reminder.Models.MessageDetails> MessageDetails { get; set; }
+//       public System.Data.Entity.DbSet<Reminder.Models.MessageCreate> MessageCreates { get; set; }
+//       public System.Data.Entity.DbSet<Reminder.Models.MessageDelete> MessageDeletes { get; set; }
+//       public System.Data.Entity.DbSet<Reminder.Models.Relationships.RelationshipCreate> RelationshipCreates { get; set; }
+//       public System.Data.Entity.DbSet<Reminder.Models.Relationships.RelationshipUpdate> RelationshipUpdates { get; set; }
+//       public System.Data.Entity.DbSet<Reminder.Models.Relationships.RelationshipDelete> RelationshipDeletes { get; set; }
     }
 
     public class IdentityUserLoginConfiguration : EntityTypeConfiguration<IdentityUserLogin>

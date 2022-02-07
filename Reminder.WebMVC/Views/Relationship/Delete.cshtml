@@ -1,0 +1,56 @@
+﻿@model Reminder.Models.Relationships.RelationshipDelete
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>RelationshipDelete</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.User)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RelatedUser)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RelatedUser)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HowRelated)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HowRelated)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Connected)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Connected)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

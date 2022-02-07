@@ -1,0 +1,66 @@
+﻿@model Reminder.Models.MessageDetails
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>MessageDetails</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Relationship.RelatedUser)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Relationship.RelatedUser)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WhenSent)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WhenSent)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Subject)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Subject)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MessageText)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MessageText)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Image)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Image)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WhenRead)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WhenRead)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

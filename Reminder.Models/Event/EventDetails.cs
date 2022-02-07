@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Reminder.Models
+namespace Reminder.Models.Event
 {
-    public class EventUpdate
+    public class EventDetails
     {
         public int Id { get; set; }
         public int RelationshipId { get; set; }

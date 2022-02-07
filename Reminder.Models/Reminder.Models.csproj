@@ -56,6 +56,7 @@
   <ItemGroup>
     <Compile Include="Event\EventCreate.cs" />
     <Compile Include="Event\EventDelete.cs" />
+    <Compile Include="Event\EventDetails.cs" />
     <Compile Include="Event\EventEdit.cs" />
     <Compile Include="Event\EventList.cs" />
     <Compile Include="Message\MessageCreate.cs" />
