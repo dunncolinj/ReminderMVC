@@ -61,8 +61,6 @@ namespace Reminder.Data
         public DbSet<Relationship> Relationships { get; set; }
         public DbSet<Event> Events { get; set; }
         public DbSet<Message> Messages { get; set; }
-
-        public System.Data.Entity.DbSet<Reminder.Models.RelationshipList> RelationshipLists { get; set; }
     }
 
     public class IdentityUserLoginConfiguration : EntityTypeConfiguration<IdentityUserLogin>
