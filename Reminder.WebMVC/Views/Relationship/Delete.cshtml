@@ -1,4 +1,4 @@
-﻿@model Reminder.Models.Relationships.RelationshipDelete
+﻿@model Reminder.Models.RelationshipDelete
 
 @{
     ViewBag.Title = "Delete";
@@ -20,11 +20,19 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.RelatedUser)
+            @Html.DisplayNameFor(model => model.RelatedUserId)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.RelatedUser)
+            @Html.DisplayFor(model => model.RelatedUserId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RelatedUserName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RelatedUserName)
         </dd>
 
         <dt>

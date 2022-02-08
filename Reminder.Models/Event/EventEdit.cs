@@ -11,7 +11,8 @@ namespace Reminder.Models
     {
         public int Id { get; set; }
         public int RelationshipId { get; set; }
-        public virtual Relationship Relationship { get; set; }
+        // Name field - populate with first / middle / last name of person related to currently logged on user
+        public string Name { get; set; }
         public DateTime Date { get; set; }
         public string Description { get; set; }
         public DateTimeOffset NotifyBefore { get; set; }

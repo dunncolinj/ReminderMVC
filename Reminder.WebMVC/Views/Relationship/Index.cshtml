@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Reminder.Models.Relationships.RelationshipList>
+﻿@model IEnumerable<Reminder.Models.RelationshipList>
 
 @{
     ViewBag.Title = "Index";
@@ -15,7 +15,13 @@
             @Html.DisplayNameFor(model => model.User)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.RelatedUser)
+            @Html.DisplayNameFor(model => model.RelatedUserId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RelatedUserName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HowRelated)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Connected)
@@ -29,7 +35,13 @@
             @Html.DisplayFor(modelItem => item.User)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.RelatedUser)
+            @Html.DisplayFor(modelItem => item.RelatedUserId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RelatedUserName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HowRelated)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Connected)

@@ -21,6 +21,6 @@ namespace Reminder.Data
         [Required]
         public string Description { get; set; }
         [Required]
-        public DateTimeOffset NotifyBefore { get; set; }
+        public DateTime NotifyBefore { get; set; }
     }
 }

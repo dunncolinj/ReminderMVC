@@ -24,11 +24,6 @@ namespace Reminder.Data
         public Genders? Gender { get; set; }
         [Required]
         public DateTime BirthDate { get; set; }
-        public byte[] Photo { get; set; }
-        // [Required]
-        // public string Email { get; set; } // inherited from parent class
-        // [Required]
-        // public string PhoneNumber { get; set; } // inherited from parent class
         [Required]
         public string Address { get; set; }
         [Required]
@@ -59,11 +54,7 @@ namespace Reminder.Data
             return new ApplicationDbContext();
         }
 
-        //public System.Data.Entity.DbSet<Reminder.Data.EventList> EventLists { get; set; }
 
-        //public System.Data.Entity.DbSet<Reminder.Data.Relationship> Relationships { get; set; }
-
-        //public System.Data.Entity.DbSet<Reminder.Data.MessageList> MessageLists { get; set; }
 
         // DbSet statements go here
         
@@ -71,16 +62,7 @@ namespace Reminder.Data
         public DbSet<Event> Events { get; set; }
         public DbSet<Message> Messages { get; set; }
 
-//       public System.Data.Entity.DbSet<Reminder.Models.Event.EventDetails> EventDetails { get; set; }
-//       public System.Data.Entity.DbSet<Reminder.Models.EventCreate> EventCreates { get; set; }
-//       public System.Data.Entity.DbSet<Reminder.Models.EventUpdate> EventUpdates { get; set; }
-//       public System.Data.Entity.DbSet<Reminder.Models.EventDelete> EventDeletes { get; set; }
-//       public System.Data.Entity.DbSet<Reminder.Models.MessageDetails> MessageDetails { get; set; }
-//       public System.Data.Entity.DbSet<Reminder.Models.MessageCreate> MessageCreates { get; set; }
-//       public System.Data.Entity.DbSet<Reminder.Models.MessageDelete> MessageDeletes { get; set; }
-//       public System.Data.Entity.DbSet<Reminder.Models.Relationships.RelationshipCreate> RelationshipCreates { get; set; }
-//       public System.Data.Entity.DbSet<Reminder.Models.Relationships.RelationshipUpdate> RelationshipUpdates { get; set; }
-//       public System.Data.Entity.DbSet<Reminder.Models.Relationships.RelationshipDelete> RelationshipDeletes { get; set; }
+        public System.Data.Entity.DbSet<Reminder.Models.RelationshipList> RelationshipLists { get; set; }
     }
 
     public class IdentityUserLoginConfiguration : EntityTypeConfiguration<IdentityUserLogin>

@@ -1,4 +1,4 @@
-﻿@model Reminder.Models.Relationships.RelationshipCreate
+﻿@model Reminder.Models.RelationshipCreate
 
 @{
     ViewBag.Title = "Create";
@@ -23,10 +23,18 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.RelatedUser, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.RelatedUserId, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.RelatedUser, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.RelatedUser, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.RelatedUserId, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.RelatedUserId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.RelatedUserName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.RelatedUserName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.RelatedUserName, "", new { @class = "text-danger" })
             </div>
         </div>
 

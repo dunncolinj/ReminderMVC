@@ -1,4 +1,4 @@
-﻿using Reminder.Models.Relationships;
+﻿using Reminder.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -1,5 +1,4 @@
 ﻿using Reminder.Models;
-using Reminder.Models.Event;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -43,6 +42,8 @@ namespace Reminder.WebMVC.Controllers
         }
 
         // POST: Update Event
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Update(EventUpdate model)
         {
             return View();

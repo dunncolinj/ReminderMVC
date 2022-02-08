@@ -240,18 +240,18 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Account\Update.cshtml" />
     <Content Include="Views\Event\Index.cshtml" />
-    <Content Include="Views\Message\Index.cshtml" />
-    <Content Include="Views\Relationship\Index.cshtml" />
     <Content Include="Views\Event\Details.cshtml" />
     <Content Include="Views\Event\Create.cshtml" />
     <Content Include="Views\Event\Update.cshtml" />
     <Content Include="Views\Event\Delete.cshtml" />
+    <Content Include="Views\Message\Index.cshtml" />
     <Content Include="Views\Message\Details.cshtml" />
     <Content Include="Views\Message\Create.cshtml" />
     <Content Include="Views\Message\Delete.cshtml" />
     <Content Include="Views\Relationship\Create.cshtml" />
     <Content Include="Views\Relationship\Update.cshtml" />
     <Content Include="Views\Relationship\Delete.cshtml" />
+    <Content Include="Views\Relationship\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

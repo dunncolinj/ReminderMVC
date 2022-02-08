@@ -152,7 +152,7 @@ namespace Reminder.WebMVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, FirstName=model.FirstName, MiddleName = model.MiddleName, LastName=model.LastName, BirthDate=model.BirthDate, Gender=model.Gender, Photo=model.Photo, PhoneNumber=model.PhoneNumber, Address=model.Address, City=model.City, State=model.State, Zip=model.Zip };
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, FirstName=model.FirstName, MiddleName = model.MiddleName, LastName=model.LastName, BirthDate=model.BirthDate, Gender=model.Gender, PhoneNumber=model.PhoneNumber, Address=model.Address, City=model.City, State=model.State, Zip=model.Zip };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {

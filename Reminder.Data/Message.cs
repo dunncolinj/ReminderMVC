@@ -22,9 +22,6 @@ namespace Reminder.Data
         public string Subject { get; set; }
         [Required]
         public string MessageText { get; set; }
-        // byte array non-nullable - stuff with default image when creating
-        [Required]
-        public byte[] Image { get; set; }
         public DateTime? WhenRead { get; set; }
     }
 }
