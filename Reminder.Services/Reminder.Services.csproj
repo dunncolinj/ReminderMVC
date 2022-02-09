@@ -54,11 +54,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EventService.cs" />
+    <Compile Include="MessageService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RelationshipService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Reminder.Data\Reminder.Data.csproj">
+      <Project>{0e043785-0180-450d-b625-7bf32e53af5e}</Project>
+      <Name>Reminder.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Reminder.Models\Reminder.Models.csproj">
+      <Project>{560b9222-9b84-4158-bb5f-678956702c10}</Project>
+      <Name>Reminder.Models</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

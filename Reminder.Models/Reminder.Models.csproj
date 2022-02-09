@@ -66,6 +66,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Relationship\RelationshipCreate.cs" />
     <Compile Include="Relationship\RelationshipDelete.cs" />
+    <Compile Include="Relationship\RelationshipDetails.cs" />
     <Compile Include="Relationship\RelationshipEdit.cs" />
     <Compile Include="Relationship\RelationshipList.cs" />
   </ItemGroup>
