@@ -101,15 +101,10 @@ namespace Reminder.WebMVC.Models
         public Genders? Gender { get; set; }
 
         [Required(ErrorMessage = "{0} is a required field.")]
-        [Range(typeof(DateTime), "01/01/1900", "02/24/2022", ErrorMessage = "Valid dates are between {1} and {2}")]
+        [DataType(DataType.Date)]
         [Display(Name = "Birth Date")]
 
         public DateTime BirthDate { get; set; }
-
-        [Required]
-        [Display(Name = "Photo")]
-        public byte[] Photo { get; set; }
-
         [Required(ErrorMessage = "{0} is a required field.")]
         [Display(Name = "Address")]
         public string Address { get; set; }
