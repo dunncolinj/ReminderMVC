@@ -1,0 +1,58 @@
+﻿@model Reminder.Models.RelationshipDetails
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>RelationshipDetails</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.User)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RelatedUserId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RelatedUserId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RelatedUserName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RelatedUserName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HowRelated)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HowRelated)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Connected)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Connected)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -252,6 +252,7 @@
     <Content Include="Views\Relationship\Update.cshtml" />
     <Content Include="Views\Relationship\Delete.cshtml" />
     <Content Include="Views\Relationship\Index.cshtml" />
+    <Content Include="Views\Relationship\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

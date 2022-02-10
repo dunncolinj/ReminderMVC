@@ -1,4 +1,6 @@
-﻿using Reminder.Models;
+﻿using Microsoft.AspNet.Identity;
+using Reminder.Models;
+using Reminder.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,17 +11,30 @@ namespace Reminder.WebMVC.Controllers
 {
     public class MessageController : Controller
     {
-        // GET: Message
-        public ActionResult Index()
+
+        private MessageService CreateMessageService()
         {
-            return View();
+            var userId = Guid.Parse(User.Identity.GetUserId());
+            var service = new MessageService(userId);
+            return service;
         }
 
-        // GET: Read Message
-        public ActionResult Details(MessageDetails model)
+        // GET: Message List
+        public ActionResult Index()
         {
-            return View();
+            var service = CreateMessageService();
+            var model = service.GetMessages();
+            return View(model);
         }
+
+        // GET: Message Details
+        public ActionResult Details(int id)
+        {
+            var service = CreateMessageService();
+            var model = service.GetMessageById(id);
+            return View(model);
+        }
+
 
         // GET: Create Message
         public ActionResult Create()
@@ -32,20 +47,41 @@ namespace Reminder.WebMVC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(MessageCreate model)
         {
-            return View();
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            var service = CreateMessageService();
+
+            if (service.CreateMessage(model))
+            {
+                ViewBag.SaveResult = "Message sent successfully.";
+                return RedirectToAction("Index");
+            };
+
+            ModelState.AddModelError("", "Message was not sent.");
+            return View(model);
         }
 
         // GET: Delete Message
-        public ActionResult Delete()
+        [ActionName("Delete")]
+        public ActionResult Delete(int id)
         {
-            return View();
+            var svc = CreateMessageService();
+            var model = svc.GetMessageById(id);
+            return View(model);
         }
         
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(MessageDelete model)
+        [ActionName("Delete")]
+        public ActionResult DeletePost(int id)
         {
-            return View();
+            var service = CreateMessageService();
+            service.DeleteMessage(id);
+            TempData["SaveResult"] = "Message deleted.";
+            return RedirectToAction("Index");
         }
     }
 }

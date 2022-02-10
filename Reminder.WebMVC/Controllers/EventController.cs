@@ -11,6 +11,13 @@ namespace Reminder.WebMVC.Controllers
 {
     public class EventController : Controller
     {
+        private EventService CreateEventService()
+        {
+            var userId = Guid.Parse(User.Identity.GetUserId());
+            var service = new EventService(userId);
+            return service;
+        }
+
         // GET: My Events
         public ActionResult Index()
         {
@@ -54,13 +61,6 @@ namespace Reminder.WebMVC.Controllers
 
             ModelState.AddModelError("", "Event could not be created.");
             return View(model);
-        }
-
-        private EventService CreateEventService()
-        {
-            var userId = Guid.Parse(User.Identity.GetUserId());
-            var service = new EventService(userId);
-            return service;
         }
 
         // GET: Update Event

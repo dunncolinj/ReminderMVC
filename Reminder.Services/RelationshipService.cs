@@ -37,6 +37,56 @@ namespace Reminder.Services
             }
         }
 
+        public bool CreateReciprocalRelationship(RelationshipCreate model)
+        {
+            RelationshipType ReciprocalRelationship = RelationshipType.colleague;
+
+            switch (model.HowRelated)
+            {
+                case RelationshipType.spouse:
+                case RelationshipType.significantOther:
+                case RelationshipType.cousin:
+                case RelationshipType.friend:
+                case RelationshipType.colleague:
+                    ReciprocalRelationship = model.HowRelated;
+                    break;
+                case RelationshipType.grandparent:
+                    ReciprocalRelationship = RelationshipType.grandchild;
+                    break;
+                case RelationshipType.grandchild:
+                    ReciprocalRelationship = RelationshipType.grandparent;
+                    break;
+                case RelationshipType.parent:
+                    ReciprocalRelationship = RelationshipType.child;
+                    break;
+                case RelationshipType.child:
+                    ReciprocalRelationship = RelationshipType.parent;
+                    break;
+                case RelationshipType.auntUncle:
+                    ReciprocalRelationship = RelationshipType.nieceNephew;
+                    break;
+                case RelationshipType.nieceNephew:
+                    ReciprocalRelationship = RelationshipType.auntUncle;
+                    break;        
+            }
+
+            var entity = new Relationship()
+            {
+                Id = model.Id,
+                User = Guid.Parse(model.RelatedUserId),
+                RelatedUserId = _userId.ToString("D"),
+                // RelatedUserName = model.RelatedUserName,
+                HowRelated = ReciprocalRelationship,
+                Connected = true
+            };
+
+            using (var ctx = new ApplicationDbContext())
+            {
+                ctx.Relationships.Add(entity);
+                return (ctx.SaveChanges() == 1);
+            }
+        }
+
         public IEnumerable<Relationship> GetRelationships()
         {
             using (var ctx = new ApplicationDbContext())
@@ -80,7 +130,6 @@ namespace Reminder.Services
                 entity.Connected = model.Connected;
 
                 return (ctx.SaveChanges() == 1);
-
             }
         }
 
