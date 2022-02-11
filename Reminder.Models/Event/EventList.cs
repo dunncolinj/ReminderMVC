@@ -13,11 +13,15 @@ namespace Reminder.Models
         public int Id { get; set; }
         public int RelationshipId { get; set; }
         // Name field - populate with first / middle / last name of person related to currently logged on user
+        [Display(Name = "Name")] 
         public string Name { get; set; }
         [DataType(DataType.Date)]
+        [Display(Name = "Date")]
         public DateTime Date { get; set; }
+        [Display(Name = "Event Description")]
         public string Description { get; set; }
-        [DataType(DataType.Date)] 
+        [DataType(DataType.Date)]
+        [Display(Name = "Notify Me On")]
         public DateTime NotifyBefore { get; set; }
     }
 }

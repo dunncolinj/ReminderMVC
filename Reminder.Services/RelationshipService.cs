@@ -36,50 +36,67 @@ namespace Reminder.Services
             }
         }
 
-        public bool CreateReciprocalRelationship(RelationshipCreate model)
+        public bool AcceptRelationship(int Id)
         {
-            RelationshipType ReciprocalRelationship = RelationshipType.colleague;
-
-            switch (model.HowRelated)
-            {
-                case RelationshipType.spouse:
-                case RelationshipType.significantOther:
-                case RelationshipType.cousin:
-                case RelationshipType.friend:
-                case RelationshipType.colleague:
-                    ReciprocalRelationship = model.HowRelated;
-                    break;
-                case RelationshipType.grandparent:
-                    ReciprocalRelationship = RelationshipType.grandchild;
-                    break;
-                case RelationshipType.grandchild:
-                    ReciprocalRelationship = RelationshipType.grandparent;
-                    break;
-                case RelationshipType.parent:
-                    ReciprocalRelationship = RelationshipType.child;
-                    break;
-                case RelationshipType.child:
-                    ReciprocalRelationship = RelationshipType.parent;
-                    break;
-                case RelationshipType.auntUncle:
-                    ReciprocalRelationship = RelationshipType.nieceNephew;
-                    break;
-                case RelationshipType.nieceNephew:
-                    ReciprocalRelationship = RelationshipType.auntUncle;
-                    break;        
-            }
-
-            var entity = new Relationship()
-            {
-                User = Guid.Parse(model.RelatedUserId),
-                RelatedUserId = _userId.ToString("D"),
-                HowRelated = ReciprocalRelationship,
-                Connected = true
-            };
+            bool returnCode1 = false;
 
             using (var ctx = new ApplicationDbContext())
             {
-                ctx.Relationships.Add(entity);
+                var entity = ctx.Relationships.Single(e => e.Id == Id);
+                entity.Connected = true;
+                returnCode1 = (ctx.SaveChanges() == 1);
+                bool returnCode2 = CreateReciprocalRelationship(Id);
+                return (returnCode1 && returnCode2);
+            }
+        }
+
+        public bool CreateReciprocalRelationship(int Id)
+        {
+            RelationshipType ReciprocalRelationship = RelationshipType.colleague;
+
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity = ctx.Relationships.Single(e => e.Id == Id);
+                RelationshipType originalRelationship = entity.HowRelated;
+                string originalUser = entity.Id.ToString("D");
+
+                switch (originalRelationship)
+                {
+                    case RelationshipType.spouse:
+                    case RelationshipType.significantOther:
+                    case RelationshipType.cousin:
+                    case RelationshipType.friend:
+                    case RelationshipType.colleague:
+                        ReciprocalRelationship = originalRelationship;
+                        break;
+                    case RelationshipType.grandparent:
+                        ReciprocalRelationship = RelationshipType.grandchild;
+                        break;
+                    case RelationshipType.grandchild:
+                        ReciprocalRelationship = RelationshipType.grandparent;
+                        break;
+                    case RelationshipType.parent:
+                        ReciprocalRelationship = RelationshipType.child;
+                        break;
+                    case RelationshipType.child:
+                        ReciprocalRelationship = RelationshipType.parent;
+                        break;
+                    case RelationshipType.auntUncle:
+                        ReciprocalRelationship = RelationshipType.nieceNephew;
+                        break;
+                    case RelationshipType.nieceNephew:
+                        ReciprocalRelationship = RelationshipType.auntUncle;
+                        break;
+                }
+                var newEntity = new Relationship()
+                {
+                    User = _userId,
+                    RelatedUserId = originalUser,
+                    HowRelated = ReciprocalRelationship,
+                    Connected = true
+                };
+
+                ctx.Relationships.Add(newEntity);
                 return (ctx.SaveChanges() == 1);
             }
         }
@@ -102,6 +119,29 @@ namespace Reminder.Services
                 return query.ToArray();
             }
         }
+
+        public IEnumerable<RelationshipList> GetRelationshipRequests()
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                // query for all my relationships
+
+                string userIdString = _userId.ToString("D");
+
+                var query = ctx.Relationships.Where(e => e.RelatedUserId == userIdString)
+                    .Select(
+                    e => new RelationshipList
+                    {
+                        User = e.User,
+                        RelatedUserId = e.RelatedUserId,
+                        RelatedUserName = e.ApplicationUser.FirstName + " " + e.ApplicationUser.MiddleName + " " + e.ApplicationUser.LastName,
+                        HowRelated = e.HowRelated,
+                        Connected = e.Connected
+                    });
+                return query.ToArray();
+            }
+        }
+
 
         public RelationshipDetails GetRelationshipById(int id)
         {
@@ -131,7 +171,6 @@ namespace Reminder.Services
                 return (ctx.SaveChanges() == 1);
             }
         }
-
 
         public bool DeleteRelationship(int Id)
         {

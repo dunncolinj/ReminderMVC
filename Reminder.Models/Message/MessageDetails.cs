@@ -13,13 +13,19 @@ namespace Reminder.Models
         public int Id { get; set; }
         public int RelationshipId { get; set; }
         [DataType(DataType.Date)]
+        [Display(Name = "Sent")] 
         public DateTime WhenSent { get; set; }
         // populate with name of sender
+        [Display(Name = "From")]
         public string SenderName { get; set; }
+        [Display(Name = "To")]
         public string RecipientName { get; set; }
+        [Display(Name = "Subject")] 
         public string Subject { get; set; }
+        [Display(Name = "Message Text")] 
         public string MessageText { get; set; }
         [DataType(DataType.Date)]
+        [Display(Name = "Read")]
         public DateTime? WhenRead { get; set; }
     }
 }

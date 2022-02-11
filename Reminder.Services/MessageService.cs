@@ -43,6 +43,7 @@ namespace Reminder.Services
             {
                 string recipient = _userId.ToString("D");
                 // query for all messages where the related user ID is the currently logged on user
+
                 var query = ctx.Messages.Where(e => e.Relationship.RelatedUserId == recipient)
                     .Select(e => new MessageListInbox
                     {
@@ -52,7 +53,6 @@ namespace Reminder.Services
                         Subject = e.Subject,
                         MessageText = e.MessageText,
                         WhenRead = e.WhenRead
-
                     }
                     );
                 return query.ToArray();

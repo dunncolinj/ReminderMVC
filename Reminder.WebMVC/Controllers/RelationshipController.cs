@@ -26,6 +26,13 @@ namespace Reminder.WebMVC.Controllers
             return View(model);
         }
 
+        // GET: Relationship - read - relationship inbox
+        public ActionResult Inbox()
+        {
+            var service = CreateRelationshipService();
+            var model = service.GetRelationshipRequests();
+            return View(model);
+        }
         // GET: Relationship - details
         public ActionResult Details(int id)
         {
@@ -75,6 +82,24 @@ namespace Reminder.WebMVC.Controllers
                 Connected = detail.Connected
             };
             return View();
+        }
+
+        //POST: Relationship - Accept
+        [HttpPost]
+        public ActionResult Accept(int id)
+        {
+            var service = CreateRelationshipService();
+            bool status = service.AcceptRelationship(id);
+            if (status == true)
+            {
+                ViewBag.SaveResult = "Relationship accepted.";
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                ViewBag.SaveResult = "Failed to accept relationship.";
+                return RedirectToAction("Index");
+            }
         }
 
         // POST: Relationship - update
