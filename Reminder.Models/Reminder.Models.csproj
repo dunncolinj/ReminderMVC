@@ -55,19 +55,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Event\EventCreate.cs" />
-    <Compile Include="Event\EventDelete.cs" />
     <Compile Include="Event\EventDetails.cs" />
-    <Compile Include="Event\EventEdit.cs" />
+    <Compile Include="Event\EventUpdate.cs" />
     <Compile Include="Event\EventList.cs" />
     <Compile Include="Message\MessageCreate.cs" />
-    <Compile Include="Message\MessageDelete.cs" />
     <Compile Include="Message\MessageDetails.cs" />
-    <Compile Include="Message\MessageList.cs" />
+    <Compile Include="Message\MessageListOutbox.cs" />
+    <Compile Include="Message\MessageListInbox.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Relationship\RelationshipCreate.cs" />
-    <Compile Include="Relationship\RelationshipDelete.cs" />
     <Compile Include="Relationship\RelationshipDetails.cs" />
-    <Compile Include="Relationship\RelationshipEdit.cs" />
+    <Compile Include="Relationship\RelationshipUpdate.cs" />
     <Compile Include="Relationship\RelationshipList.cs" />
   </ItemGroup>
   <ItemGroup>

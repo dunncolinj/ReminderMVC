@@ -63,6 +63,7 @@ namespace Reminder.WebMVC.Controllers
         }
 
         // GET: Update Event
+        [ActionName("Edit")]
         public ActionResult Update(int id)
         {
             var service = CreateEventService();
@@ -77,6 +78,7 @@ namespace Reminder.WebMVC.Controllers
         }
 
         // POST: Update Event
+        [ActionName("Edit")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Update(int id, EventUpdate model)

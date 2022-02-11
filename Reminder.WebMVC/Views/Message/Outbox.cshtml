@@ -1,10 +1,10 @@
-﻿@model IEnumerable<Reminder.Models.MessageListInbox>
+﻿@model IEnumerable<Reminder.Models.MessageListOutbox>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Outbox";
 }
 
-<h2>Index</h2>
+<h2>Outbox</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -18,7 +18,7 @@
             @Html.DisplayNameFor(model => model.WhenSent)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.SenderName)
+            @Html.DisplayNameFor(model => model.RecipientName)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Subject)
@@ -41,7 +41,7 @@
             @Html.DisplayFor(modelItem => item.WhenSent)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.SenderName)
+            @Html.DisplayFor(modelItem => item.RecipientName)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Subject)

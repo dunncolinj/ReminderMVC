@@ -23,7 +23,14 @@ namespace Reminder.WebMVC.Controllers
         public ActionResult Index()
         {
             var service = CreateMessageService();
-            var model = service.GetMessages();
+            var model = service.GetMessagesInbox();
+            return View(model);
+        }
+
+        public ActionResult Outbox()
+        {
+            var service = CreateMessageService();
+            var model = service.GetMessagesOutbox();
             return View(model);
         }
 

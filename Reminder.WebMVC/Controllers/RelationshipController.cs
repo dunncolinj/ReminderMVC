@@ -63,6 +63,7 @@ namespace Reminder.WebMVC.Controllers
         }
 
         // GET: Relationship - update
+        [ActionName("Edit")]
         public ActionResult Update(int id)
         {
             var service = CreateRelationshipService();
@@ -79,6 +80,7 @@ namespace Reminder.WebMVC.Controllers
         // POST: Relationship - update
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [ActionName("Edit")]
         public ActionResult Update(int id, RelationshipUpdate model)
         {
             if (!ModelState.IsValid)

@@ -24,11 +24,10 @@ namespace Reminder.Services
                 // property = model.property
                 Id = model.Id,
                 RelationshipId = model.RelationshipId,
-                WhenSent = model.WhenSent,
-                // RecipientName = model.RecipientName,
+                WhenSent = DateTime.Now,
                 Subject = model.Subject,
                 MessageText = model.MessageText,
-                WhenRead = model.WhenRead
+                WhenRead = null
             };
 
             using (var ctx = new ApplicationDbContext())
@@ -38,15 +37,46 @@ namespace Reminder.Services
             }
         }
 
-        public IEnumerable<MessageList> GetMessages()
+        public IEnumerable<MessageListInbox> GetMessagesInbox()
         {
             using (var ctx = new ApplicationDbContext())
             {
                 string recipient = _userId.ToString("D");
                 // query for all messages where the related user ID is the currently logged on user
-                var query = ctx.Messages.Where(e => e.Relationship.RelatedUserId == recipient);
-                // return query.ToArray();
-                return null;
+                var query = ctx.Messages.Where(e => e.Relationship.RelatedUserId == recipient)
+                    .Select(e => new MessageListInbox
+                    {
+                        RelationshipId = e.RelationshipId,
+                        WhenSent = e.WhenSent,
+                        SenderName = e.Relationship.ApplicationUser.FirstName + " " + e.Relationship.ApplicationUser.MiddleName + " " + e.Relationship.ApplicationUser.LastName,
+                        Subject = e.Subject,
+                        MessageText = e.MessageText,
+                        WhenRead = e.WhenRead
+
+                    }
+                    );
+                return query.ToArray();
+            }
+        }
+
+        public IEnumerable<MessageListOutbox> GetMessagesOutbox()
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                Guid sender = _userId;
+                // query for all messages where the user ID is the currently logged on user
+                var query = ctx.Messages.Where(e => e.Relationship.User == sender)
+                    .Select(e => new MessageListOutbox
+                    {
+                        RelationshipId = e.RelationshipId,
+                        WhenSent = e.WhenSent,
+                        RecipientName = e.Relationship.ApplicationUser.FirstName + " " + e.Relationship.ApplicationUser.MiddleName + " " + e.Relationship.ApplicationUser.LastName,
+                        Subject = e.Subject,
+                        MessageText = e.MessageText,
+                        WhenRead = e.WhenRead
+                    }
+                    );
+                return query.ToArray();
             }
         }
 
@@ -54,18 +84,30 @@ namespace Reminder.Services
         {
             using (var ctx = new ApplicationDbContext())
             {
-                var entity = ctx.Messages.Single(e => (e.Id == id) && (Guid.Parse(e.Relationship.RelatedUserId) == _userId));
+                DateTime? _timeStamp;
+
+                var entity = ctx.Messages.Single(e => (e.Id == id) && ((Guid.Parse(e.Relationship.RelatedUserId) == _userId)) || (e.Relationship.User == _userId));
+
+                if (entity.WhenRead == null)
+                {
+                    _timeStamp = DateTime.Now;
+                }
+                else {
+                    _timeStamp = entity.WhenRead;
+                }
 
                 return new MessageDetails
                 {
                     // property = entity.property
                     Id = entity.Id,
                     RelationshipId = entity.RelationshipId,
-                    SenderName = (entity.Relationship.ApplicationUser.FirstName + " " + entity.Relationship.ApplicationUser.LastName),
+// need to find way to retrieve sender and recipient's names through a relationship object
+//                    SenderName = entity.Relationship.,
+//                    RecipientName = entity.Relationship,
                     WhenSent = entity.WhenSent,
                     Subject = entity.Subject,
                     MessageText = entity.MessageText,
-                    WhenRead = entity.WhenRead
+                    WhenRead = _timeStamp
                 };
             }
         }
