@@ -21,8 +21,7 @@ namespace Reminder.WebMVC.Controllers
         // GET: My Events
         public ActionResult Index()
         {
-            var userID = Guid.Parse(User.Identity.GetUserId());
-            var service = new EventService(userID);
+            var service = CreateEventService();
             var model = service.GetEvents();
             return View(model);
         }
@@ -30,8 +29,8 @@ namespace Reminder.WebMVC.Controllers
         // GET: Event Details
         public ActionResult Details(int id)
         {
-            var svc = CreateEventService();
-            var model = svc.GetEventById(id);
+            var service = CreateEventService();
+            var model = service.GetEventById(id);
             return View(model);
         }
 
@@ -70,9 +69,6 @@ namespace Reminder.WebMVC.Controllers
             var detail = service.GetEventById(id);
             var model = new EventUpdate
             {
-                Id = detail.Id,
-                RelationshipId = detail.RelationshipId,
-                Name = detail.Name,
                 Date = detail.Date,
                 Description = detail.Description,
                 NotifyBefore = detail.NotifyBefore
@@ -111,8 +107,8 @@ namespace Reminder.WebMVC.Controllers
         [ActionName("Delete")]
         public ActionResult Delete(int id)
         {
-            var svc = CreateEventService();
-            var model = svc.GetEventById(id);
+            var service = CreateEventService();
+            var model = service.GetEventById(id);
             return View(model);
         }
 

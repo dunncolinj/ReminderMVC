@@ -15,8 +15,8 @@ namespace Reminder.Data
         public int Id { get; set; }
         [Required]
         public Guid User { get; set; }
-        [ForeignKey(nameof(ApplicationUser))]
         [Required]
+        [ForeignKey(nameof(ApplicationUser))]
         public string RelatedUserId { get; set; }
         public virtual ApplicationUser ApplicationUser { get; set; }
         [Required]

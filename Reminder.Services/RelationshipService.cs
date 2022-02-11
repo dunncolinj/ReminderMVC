@@ -19,15 +19,14 @@ namespace Reminder.Services
 
         public bool CreateRelationship(RelationshipCreate model)
         {
+            
             var entity = new Relationship()
             {
                 // property = model.property
-                Id = model.Id,
                 User = _userId,
                 RelatedUserId = model.RelatedUserId,
-                // RelatedUserName = model.RelatedUserName,
                 HowRelated = model.HowRelated,
-                Connected = model.Connected
+                Connected = false
             };
 
             using (var ctx = new ApplicationDbContext())
@@ -72,10 +71,8 @@ namespace Reminder.Services
 
             var entity = new Relationship()
             {
-                Id = model.Id,
                 User = Guid.Parse(model.RelatedUserId),
                 RelatedUserId = _userId.ToString("D"),
-                // RelatedUserName = model.RelatedUserName,
                 HowRelated = ReciprocalRelationship,
                 Connected = true
             };
@@ -87,12 +84,21 @@ namespace Reminder.Services
             }
         }
 
-        public IEnumerable<Relationship> GetRelationships()
+        public IEnumerable<RelationshipList> GetRelationships()
         {
             using (var ctx = new ApplicationDbContext())
             {
-                // query for all messages where the related user ID is the currently logged on user
-                var query = ctx.Relationships.Where(e => ((Guid.Parse(e.ApplicationUser.Id) == _userId) || (Guid.Parse(e.RelatedUserId) == _userId)));
+                // query for all my relationships
+
+                var query = ctx.Relationships.Where(e => e.User == _userId)
+                    .Select(
+                    e => new RelationshipList
+                    {
+                        RelatedUserId = e.RelatedUserId,
+                        RelatedUserName = e.ApplicationUser.FirstName + " " + e.ApplicationUser.MiddleName + " " + e.ApplicationUser.LastName,
+                        HowRelated = e.HowRelated,
+                        Connected = e.Connected
+                    } );
                 return query.ToArray();
             }
         }
@@ -101,15 +107,14 @@ namespace Reminder.Services
         {
             using (var ctx = new ApplicationDbContext())
             {
-                var entity = ctx.Relationships.Single(e => (e.Id == id) && (Guid.Parse(e.ApplicationUser.Id) == _userId) || (Guid.Parse(e.RelatedUserId) == _userId));
+                var entity = ctx.Relationships.Single(e => e.User == _userId && e.Id == id);
 
                 return new RelationshipDetails
                 {
                     // property = entity.property
                     Id = entity.Id,
-                    User = _userId,
                     RelatedUserId = entity.RelatedUserId,
-                    // RelatedUserName = model.RelatedUserName,
+                    RelatedUserName = entity.ApplicationUser.FirstName + " " + entity.ApplicationUser.MiddleName + " " + entity.ApplicationUser.LastName,
                     HowRelated = entity.HowRelated,
                     Connected = entity.Connected
                 };
@@ -120,15 +125,9 @@ namespace Reminder.Services
         {
             using (var ctx = new ApplicationDbContext())
             {
-                var entity = ctx.Relationships.Single(e => (e.Id == model.Id) && (e.User == _userId));
-
-                entity.Id = model.Id;
-                entity.User = model.User;
-                entity.RelatedUserId = model.RelatedUserId;
-                // entity.RelatedUserName = model.RelatedUserName;
+                var entity = ctx.Relationships.Single(e => e.User == _userId && e.Id == model.Id);
                 entity.HowRelated = model.HowRelated;
                 entity.Connected = model.Connected;
-
                 return (ctx.SaveChanges() == 1);
             }
         }
@@ -138,13 +137,12 @@ namespace Reminder.Services
         {
             using (var ctx = new ApplicationDbContext())
             {
-                var entity = ctx.Relationships.Single(e => (e.Id == Id) && (Guid.Parse(e.RelatedUserId) == _userId) || (Guid.Parse(e.ApplicationUser.Id) == _userId));
+
+                var entity = ctx.Relationships.Single(e => e.Id == Id && e.User == _userId);
                 ctx.Relationships.Remove(entity);
                 return (ctx.SaveChanges() == 1);
+                // update reciprocal to delete
             }
         }
-
-
-
     }
 }

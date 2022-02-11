@@ -13,6 +13,7 @@ namespace Reminder.Data
         [Key]
         public int Id { get; set; }
         [Required]
+//        [ForeignKey(nameof(RelationshipId))]
         public int RelationshipId { get; set; }
         [ForeignKey(nameof(RelationshipId))]
         public virtual Relationship Relationship { get; set; }

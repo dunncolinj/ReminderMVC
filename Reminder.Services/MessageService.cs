@@ -38,13 +38,15 @@ namespace Reminder.Services
             }
         }
 
-        public IEnumerable<Message> GetMessages()
+        public IEnumerable<MessageList> GetMessages()
         {
             using (var ctx = new ApplicationDbContext())
             {
+                string recipient = _userId.ToString("D");
                 // query for all messages where the related user ID is the currently logged on user
-                var query = ctx.Messages.Where(e => (Guid.Parse(e.Relationship.RelatedUserId) == _userId));
-                return query.ToArray();
+                var query = ctx.Messages.Where(e => e.Relationship.RelatedUserId == recipient);
+                // return query.ToArray();
+                return null;
             }
         }
 

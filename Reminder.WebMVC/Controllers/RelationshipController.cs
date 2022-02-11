@@ -17,6 +17,7 @@ namespace Reminder.WebMVC.Controllers
             var service = new RelationshipService(userId);
             return service;
         }
+
         // GET: Relationship - read - list my relationships
         public ActionResult Index()
         {
@@ -69,10 +70,6 @@ namespace Reminder.WebMVC.Controllers
             var model = new RelationshipUpdate
             {
                 // property = detail.property
-                Id = detail.Id,
-                User = detail.User,
-                RelatedUserId = detail.RelatedUserId,
-                RelatedUserName = detail.RelatedUserName,
                 HowRelated = detail.HowRelated,
                 Connected = detail.Connected
             };
@@ -107,6 +104,7 @@ namespace Reminder.WebMVC.Controllers
         }
 
         // GET: Relationship - delete
+        [ActionName("Delete")]
         public ActionResult Delete(int id)
         {
             var svc = CreateRelationshipService();
