@@ -1,4 +1,6 @@
-﻿using Reminder.Data;
+﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using Reminder.Data;
 using Reminder.Models;
 using System;
 using System.Collections.Generic;
@@ -65,6 +67,8 @@ namespace Reminder.Services
             {
                 Guid sender = _userId;
                 // query for all messages where the user ID is the currently logged on user
+
+
                 var query = ctx.Messages.Where(e => e.Relationship.User == sender)
                     .Select(e => new MessageListOutbox
                     {
@@ -87,6 +91,8 @@ namespace Reminder.Services
                 DateTime? _timeStamp;
 
                 var entity = ctx.Messages.Single(e => (e.Id == id) && ((Guid.Parse(e.Relationship.RelatedUserId) == _userId)) || (e.Relationship.User == _userId));
+                UserManager<ApplicationUser> userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(ctx));
+                var user = userManager.FindById(_userId.ToString("D"));
 
                 if (entity.WhenRead == null)
                 {
@@ -101,9 +107,8 @@ namespace Reminder.Services
                     // property = entity.property
                     Id = entity.Id,
                     RelationshipId = entity.RelationshipId,
-// need to find way to retrieve sender and recipient's names through a relationship object
-//                    SenderName = entity.Relationship.,
-//                    RecipientName = entity.Relationship,
+                    SenderName = user.FirstName + " " + user.MiddleName + " " + user.LastName,
+                    RecipientName = entity.Relationship.ApplicationUser.FirstName + " " + entity.Relationship.ApplicationUser.MiddleName + " " + entity.Relationship.ApplicationUser.LastName,
                     WhenSent = entity.WhenSent,
                     Subject = entity.Subject,
                     MessageText = entity.MessageText,
