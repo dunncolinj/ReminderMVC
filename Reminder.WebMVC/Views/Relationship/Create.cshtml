@@ -1,5 +1,4 @@
 ﻿@model Reminder.Models.RelationshipCreate
-    @Html.AntiForgeryToken()
 
 @{
     ViewBag.Title = "Create";
@@ -12,13 +11,12 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>RelationshipCreate</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
             @Html.LabelFor(model => model.User, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.User, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DisplayFor(model => model.User, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.User, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -34,7 +32,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.RelatedUserName, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.RelatedUserName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DisplayFor(model => model.RelatedUserName, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.RelatedUserName, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -66,5 +64,5 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to my relationships", "Index")
 </div>

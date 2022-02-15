@@ -7,17 +7,8 @@
 <h2>Message details</h2>
 
 <div>
-    <h4>MessageDetails</h4>
     <hr />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.RelationshipId)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.RelationshipId)
-        </dd>
-
         <dt>
             @Html.DisplayNameFor(model => model.WhenSent)
         </dt>
@@ -69,6 +60,5 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to my messages", "Index")
 </p>
