@@ -251,6 +251,7 @@
     <Content Include="Views\Relationship\Details.cshtml" />
     <Content Include="Views\Relationship\Create.cshtml" />
     <Content Include="Views\Relationship\Update.cshtml" />
+    <Content Include="Views\Relationship\ListUsers.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

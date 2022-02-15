@@ -41,6 +41,15 @@ namespace Reminder.WebMVC.Controllers
             return View(model);
         }
 
+        // GET: Relationship - list users
+
+        public ActionResult ListUsers()
+        {
+            var service = CreateRelationshipService();
+            var model = service.ListUsers();
+            return View(model);
+        }
+
         // GET: Relationship - create
         public ActionResult Create()
         {

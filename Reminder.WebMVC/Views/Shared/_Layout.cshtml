@@ -11,20 +11,30 @@
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
+        </div>
+        <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Reminder", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" }) 
-                @if (User.Identity.IsAuthenticated) { @Html.ActionLink("My Relationships", "Index", "Relationship", new { area = "" }, new { @class = "navbar-brand" }) }
-                @if (User.Identity.IsAuthenticated) { @Html.ActionLink("My Events", "Index", "Event", new { area = "" }, new { @class = "navbar-brand" }) }
-                @if (User.Identity.IsAuthenticated) { @Html.ActionLink("My Messages", "Index", "Message", new { area = "" }, new { @class = "navbar-brand" }) }
+                @Html.ActionLink("Reminder", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>
+                        @if (User.Identity.IsAuthenticated)
+                        {@Html.ActionLink("My Relationships", "Index", "Relationship", new { area = "" })}
+                    </li>
+                    <li>
+                        @if (User.Identity.IsAuthenticated)
+                        {@Html.ActionLink("My Events", "Index", "Event", new { area = "" })}
+                    </li>
+                    <li>
+                        @if (User.Identity.IsAuthenticated)
+                        {@Html.ActionLink("My Messages", "Index", "Message", new { area = "" })}
+                    </li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                 </ul>

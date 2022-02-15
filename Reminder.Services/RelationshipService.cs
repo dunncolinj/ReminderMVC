@@ -1,5 +1,8 @@
-﻿using Reminder.Data;
+﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using Reminder.Data;
 using Reminder.Models;
+using Reminder.Models.Relationship;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,20 +20,41 @@ namespace Reminder.Services
             _userId = userId;
         }
 
-        public bool CreateRelationship(RelationshipCreate model)
+        public IEnumerable<UserList> ListUsers()
         {
-            
-            var entity = new Relationship()
-            {
-                // property = model.property
-                User = _userId,
-                RelatedUserId = model.RelatedUserId,
-                HowRelated = model.HowRelated,
-                Connected = false
-            };
-
             using (var ctx = new ApplicationDbContext())
             {
+                string userIdString = _userId.ToString("D");
+
+                UserManager<ApplicationUser> userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(ctx));
+                var users = userManager.Users.Where(e => e.Id != userIdString).Select(e => new UserList
+                {
+                    Id = e.Id,
+                    FirstName = e.FirstName,
+                    MiddleName = e.MiddleName,
+                    LastName = e.LastName,
+                    City = e.City,
+                    State = e.State,
+                    Zip = e.Zip
+                });
+            
+                return users.ToArray();
+            }
+        }
+        public bool CreateRelationship(RelationshipCreate model)
+        {
+            using (var ctx = new ApplicationDbContext())
+            { 
+
+                var entity = new Relationship()
+                {
+                    // property = model.property
+                    User = _userId,
+                    RelatedUserId = model.RelatedUserId,
+                    HowRelated = model.HowRelated,
+                    Connected = false
+                };
+
                 ctx.Relationships.Add(entity);
                 return (ctx.SaveChanges() == 1);
             }
@@ -124,7 +148,7 @@ namespace Reminder.Services
         {
             using (var ctx = new ApplicationDbContext())
             {
-                // query for all my relationships
+                // query for all my relationship requests
 
                 string userIdString = _userId.ToString("D");
 

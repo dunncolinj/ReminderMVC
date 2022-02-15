@@ -91,6 +91,8 @@ namespace Reminder.Services
                 DateTime? _timeStamp;
 
                 var entity = ctx.Messages.Single(e => (e.Id == id) && ((Guid.Parse(e.Relationship.RelatedUserId) == _userId)) || (e.Relationship.User == _userId));
+
+
                 UserManager<ApplicationUser> userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(ctx));
                 var user = userManager.FindById(_userId.ToString("D"));
 
