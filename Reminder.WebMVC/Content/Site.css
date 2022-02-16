@@ -1,6 +1,18 @@
-﻿body {
+﻿/* Define variables for color scheme */
+:root {
+    --light-gray: #d6d6d6ff;
+    --aureolin: #ffee32ff;
+    --cyber-yellow: #ffd100ff;
+    --eerie-black: #202020ff;
+    --jet: #333533ff;
+}
+
+body {
     padding-top: 50px;
     padding-bottom: 20px;
+    font-family: serif;
+    color: var(--jet);
+    background-color: var(--cyber-yellow);
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -21,4 +33,28 @@ input,
 select,
 textarea {
     max-width: 280px;
+}
+
+html {
+    font-family: sans-serif
+}
+
+code, kbd, pre, samp {
+    font-family: monospace
+}
+
+button, input, optgroup, select, textarea {
+    font-family: inherit
+}
+
+.tooltip {
+    font-family: sans-serif
+}
+
+.popover {
+    font-family: sans-serif
+}
+
+.text-monospace {
+    font-family: monospace
 }

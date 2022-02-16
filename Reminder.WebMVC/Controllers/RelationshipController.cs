@@ -73,7 +73,7 @@ namespace Reminder.WebMVC.Controllers
             //            {
             //                items.Add(new SelectListItem
             //                {
-            //                    Text = u.FirstName,
+            //                    Text = u.FirstName + " " + u.MiddleName + " " + u.LastName,
             //                    Value = u.Id
             //                });
             //            }
