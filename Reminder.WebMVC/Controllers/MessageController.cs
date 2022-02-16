@@ -19,6 +19,8 @@ namespace Reminder.WebMVC.Controllers
             return service;
         }
 
+        // GET: List users
+
         // GET: Message List
         public ActionResult Index()
         {

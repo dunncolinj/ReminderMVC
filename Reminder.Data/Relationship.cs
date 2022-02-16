@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Reminder.Data
 {
-    public enum RelationshipType { spouse, significantOther, grandparent, parent, child, grandchild, nieceNephew, auntUncle, cousin, friend, colleague }
+    public enum RelationshipType { spouse, significantOther, grandparent, parent, child, grandchild, nieceNephew, auntUncle, cousin, friend, colleague, sibling }
     public class Relationship
     {
         [Key]

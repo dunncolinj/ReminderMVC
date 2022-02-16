@@ -19,6 +19,7 @@ namespace Reminder.Services
             _userId = userId;
         }
 
+
         public bool CreateMessage(MessageCreate model)
         {
             var entity = new Message()

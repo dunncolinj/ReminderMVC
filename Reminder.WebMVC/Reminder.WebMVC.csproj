@@ -182,7 +182,6 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="assets\postit.png" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -247,14 +246,15 @@
     <Content Include="Views\Message\Outbox.cshtml" />
     <Content Include="Views\Message\Details.cshtml" />
     <Content Include="Views\Message\Create.cshtml" />
-    <Content Include="Views\Relationship\Index.cshtml" />
     <Content Include="Views\Relationship\Details.cshtml" />
-    <Content Include="Views\Relationship\Create.cshtml" />
     <Content Include="Views\Relationship\Update.cshtml" />
     <Content Include="Views\Relationship\ListUsers.cshtml" />
+    <Content Include="Views\Relationship\Index.cshtml" />
+    <Content Include="Views\Relationship\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="assets\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

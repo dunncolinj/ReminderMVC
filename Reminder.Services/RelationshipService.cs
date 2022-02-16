@@ -91,6 +91,7 @@ namespace Reminder.Services
                     case RelationshipType.cousin:
                     case RelationshipType.friend:
                     case RelationshipType.colleague:
+                    case RelationshipType.sibling:
                         ReciprocalRelationship = originalRelationship;
                         break;
                     case RelationshipType.grandparent:
