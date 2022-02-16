@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using Reminder.Data;
 using Reminder.Models;
 using Reminder.Services;
 using System;
@@ -50,9 +52,33 @@ namespace Reminder.WebMVC.Controllers
             return View(model);
         }
 
+        public List<ApplicationUser>GetUsers()
+        {
+            var ctx = new ApplicationDbContext();
+            UserManager<ApplicationUser> userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(ctx));
+            return userManager.Users.ToList();
+        }
+
         // GET: Relationship - create
         public ActionResult Create()
         {
+            var ctx = new ApplicationDbContext();
+            //            UserManager<ApplicationUser> userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(ctx));
+            //            var userId = User.Identity.GetUserId();
+            //            var users = userManager.Users.Where(u => u.Id != userId).ToList();
+
+
+            //            List<SelectListItem> items = new List<SelectListItem>();
+            //           foreach (var u in users)
+            //            {
+            //                items.Add(new SelectListItem
+            //                {
+            //                    Text = u.FirstName,
+            //                    Value = u.Id
+            //                });
+            //            }
+//            var users = ctx.Users.ToList();
+            ViewBag.RelatedUserId = new SelectList(ctx.Users, "Id", "FirstName");
             return View();
         }
 

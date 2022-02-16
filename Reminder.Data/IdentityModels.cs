@@ -15,7 +15,7 @@ namespace Reminder.Data
     {
         // added user profile properties
         // [Key]
-        // public Guid Id { get; set; } // inherited from parent class
+        // public string Id { get; set; } // inherited from parent class
         [Required]
         public string FirstName { get; set; }
         public string MiddleName { get; set; }

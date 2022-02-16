@@ -13,27 +13,13 @@
     <div class="form-horizontal">
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.User, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.User, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.User, "", new { @class = "text-danger" })
-            </div>
-        </div>
+        @Html.HiddenFor(model => model.User)
 
         <div class="form-group">
-            @Html.LabelFor(model => model.RelatedUserId, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.RelatedUserId,"RelatedUserId", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.RelatedUserId, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DropDownList(ViewData["RelatedUserId"] as IEnumerable<SelectListItem>, null, htmlAttributes: new { @class = "form-control" } )
                 @Html.ValidationMessageFor(model => model.RelatedUserId, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.RelatedUserName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.RelatedUserName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.RelatedUserName, "", new { @class = "text-danger" })
             </div>
         </div>
 
