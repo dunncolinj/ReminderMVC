@@ -63,8 +63,11 @@ namespace Reminder.WebMVC.Controllers
         public ActionResult Create()
         {
             var ctx = new ApplicationDbContext();
+            ViewBag.RelatedUsers = new SelectList(ctx.Users, "Id", "FirstName");
+            return View();
+
             //            UserManager<ApplicationUser> userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(ctx));
-            //            var userId = User.Identity.GetUserId();
+            // var userId = User.Identity.GetUserId();
             //            var users = userManager.Users.Where(u => u.Id != userId).ToList();
 
 
@@ -77,9 +80,10 @@ namespace Reminder.WebMVC.Controllers
             //                    Value = u.Id
             //                });
             //            }
-//            var users = ctx.Users.ToList();
-            ViewBag.RelatedUserId = new SelectList(ctx.Users, "Id", "FirstName");
-            return View();
+            //RelationshipCreate modelInstance = new RelationshipCreate();
+            //modelInstance.RelatedUsers = ctx.Users.ToList();
+            // ViewBag.Id = userId.ToString();
+
         }
 
         // POST: Relationship - create

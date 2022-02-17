@@ -16,10 +16,10 @@
         @Html.HiddenFor(model => model.User)
 
         <div class="form-group">
-            @Html.LabelFor(model => model.RelatedUserId,"RelatedUserId", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.RelatedUserItem,"RelatedUserId", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList(ViewData["RelatedUserId"] as IEnumerable<SelectListItem>, null, htmlAttributes: new { @class = "form-control" } )
-                @Html.ValidationMessageFor(model => model.RelatedUserId, "", new { @class = "text-danger" })
+                @Html.DropDownList("RelatedUsers", null, "Select User", htmlAttributes: new { @class = "form-control" } )
+                @Html.ValidationMessageFor(model => model.RelatedUserItem, "", new { @class = "text-danger" })
             </div>
         </div>
 
