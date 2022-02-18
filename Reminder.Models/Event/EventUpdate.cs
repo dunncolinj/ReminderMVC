@@ -10,7 +10,9 @@ namespace Reminder.Models
 {
     public class EventUpdate
     {
+        [Display(Name = "Event ID")]
         public int Id { get; set; }
+        [Display(Name = "Relationship ID")] 
         public int RelationshipId { get; set; }
         // Name field - populate with first / middle / last name of person related to currently logged on user
         [Display(Name = "Name")] 

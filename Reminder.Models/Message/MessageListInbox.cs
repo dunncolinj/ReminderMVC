@@ -11,6 +11,7 @@ namespace Reminder.Models
     public class MessageListInbox
     {
         public int Id { get; set; }
+        [Display(Name = "Relationship ID")]
         public int RelationshipId { get; set; }
         [DataType(DataType.Date)]
         [Display(Name = "Sent")] 
