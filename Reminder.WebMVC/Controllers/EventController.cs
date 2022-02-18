@@ -63,22 +63,23 @@ namespace Reminder.WebMVC.Controllers
         }
 
         // GET: Update Event
-        [ActionName("Edit")]
+        [ActionName("Update")]
         public ActionResult Update(int id)
         {
             var service = CreateEventService();
             var detail = service.GetEventById(id);
             var model = new EventUpdate
             {
+                Name = detail.Name,
                 Date = detail.Date,
                 Description = detail.Description,
                 NotifyBefore = detail.NotifyBefore
             };
-            return View();
+            return View(model);
         }
 
         // POST: Update Event
-        [ActionName("Edit")]
+        [ActionName("Update")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Update(int id, EventUpdate model)

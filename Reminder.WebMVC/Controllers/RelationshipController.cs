@@ -28,13 +28,6 @@ namespace Reminder.WebMVC.Controllers
             return View(model);
         }
 
-        // GET: Relationship - read - relationship inbox
-        public ActionResult Inbox()
-        {
-            var service = CreateRelationshipService();
-            var model = service.GetRelationshipRequests();
-            return View(model);
-        }
         // GET: Relationship - details
         public ActionResult Details(int id)
         {
@@ -52,38 +45,10 @@ namespace Reminder.WebMVC.Controllers
             return View(model);
         }
 
-        public List<ApplicationUser>GetUsers()
-        {
-            var ctx = new ApplicationDbContext();
-            UserManager<ApplicationUser> userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(ctx));
-            return userManager.Users.ToList();
-        }
-
         // GET: Relationship - create
         public ActionResult Create()
         {
-            var ctx = new ApplicationDbContext();
-            ViewBag.RelatedUsers = new SelectList(ctx.Users, "Id", "FirstName");
             return View();
-
-            //            UserManager<ApplicationUser> userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(ctx));
-            // var userId = User.Identity.GetUserId();
-            //            var users = userManager.Users.Where(u => u.Id != userId).ToList();
-
-
-            //            List<SelectListItem> items = new List<SelectListItem>();
-            //           foreach (var u in users)
-            //            {
-            //                items.Add(new SelectListItem
-            //                {
-            //                    Text = u.FirstName + " " + u.MiddleName + " " + u.LastName,
-            //                    Value = u.Id
-            //                });
-            //            }
-            //RelationshipCreate modelInstance = new RelationshipCreate();
-            //modelInstance.RelatedUsers = ctx.Users.ToList();
-            // ViewBag.Id = userId.ToString();
-
         }
 
         // POST: Relationship - create
@@ -109,7 +74,7 @@ namespace Reminder.WebMVC.Controllers
         }
 
         // GET: Relationship - update
-        [ActionName("Edit")]
+        [ActionName("Update")]
         public ActionResult Update(int id)
         {
             var service = CreateRelationshipService();
@@ -117,34 +82,18 @@ namespace Reminder.WebMVC.Controllers
             var model = new RelationshipUpdate
             {
                 // property = detail.property
+                Id = detail.Id,
+                RelatedUserName = detail.RelatedUserName,
                 HowRelated = detail.HowRelated,
                 Connected = detail.Connected
             };
-            return View();
-        }
-
-        //POST: Relationship - Accept
-        [HttpPost]
-        public ActionResult Accept(int id)
-        {
-            var service = CreateRelationshipService();
-            bool status = service.AcceptRelationship(id);
-            if (status == true)
-            {
-                ViewBag.SaveResult = "Relationship accepted.";
-                return RedirectToAction("Index");
-            }
-            else
-            {
-                ViewBag.SaveResult = "Failed to accept relationship.";
-                return RedirectToAction("Index");
-            }
+            return View(model);
         }
 
         // POST: Relationship - update
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [ActionName("Edit")]
+        [ActionName("Update")]
         public ActionResult Update(int id, RelationshipUpdate model)
         {
             if (!ModelState.IsValid)

@@ -25,7 +25,6 @@ namespace Reminder.Services
             var entity = new Message()
             {
                 // property = model.property
-                Id = model.Id,
                 RelationshipId = model.RelationshipId,
                 WhenSent = DateTime.Now,
                 Subject = model.Subject,
@@ -45,11 +44,13 @@ namespace Reminder.Services
             using (var ctx = new ApplicationDbContext())
             {
                 string recipient = _userId.ToString("D");
+
                 // query for all messages where the related user ID is the currently logged on user
 
                 var query = ctx.Messages.Where(e => e.Relationship.RelatedUserId == recipient)
                     .Select(e => new MessageListInbox
                     {
+                        Id = e.Id,
                         RelationshipId = e.RelationshipId,
                         WhenSent = e.WhenSent,
                         SenderName = e.Relationship.ApplicationUser.FirstName + " " + e.Relationship.ApplicationUser.MiddleName + " " + e.Relationship.ApplicationUser.LastName,
@@ -73,6 +74,7 @@ namespace Reminder.Services
                 var query = ctx.Messages.Where(e => e.Relationship.User == sender)
                     .Select(e => new MessageListOutbox
                     {
+                        Id = e.Id,
                         RelationshipId = e.RelationshipId,
                         WhenSent = e.WhenSent,
                         RecipientName = e.Relationship.ApplicationUser.FirstName + " " + e.Relationship.ApplicationUser.MiddleName + " " + e.Relationship.ApplicationUser.LastName,
@@ -91,11 +93,12 @@ namespace Reminder.Services
             {
                 DateTime? _timeStamp;
 
-                var entity = ctx.Messages.Single(e => (e.Id == id) && ((Guid.Parse(e.Relationship.RelatedUserId) == _userId)) || (e.Relationship.User == _userId));
+                string userIdString = _userId.ToString("D");
 
+                var entity = ctx.Messages.Single(e => e.Id == id);
 
-                UserManager<ApplicationUser> userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(ctx));
-                var user = userManager.FindById(_userId.ToString("D"));
+                var sender = ctx.Users.Find(entity.Relationship.User.ToString("D"));
+                var recipient = ctx.Users.Find(entity.Relationship.RelatedUserId);
 
                 if (entity.WhenRead == null)
                 {
@@ -110,8 +113,8 @@ namespace Reminder.Services
                     // property = entity.property
                     Id = entity.Id,
                     RelationshipId = entity.RelationshipId,
-                    SenderName = user.FirstName + " " + user.MiddleName + " " + user.LastName,
-                    RecipientName = entity.Relationship.ApplicationUser.FirstName + " " + entity.Relationship.ApplicationUser.MiddleName + " " + entity.Relationship.ApplicationUser.LastName,
+                    SenderName = sender.FirstName + " " + sender.MiddleName + " " + sender.LastName,
+                    RecipientName = recipient.FirstName + " " + recipient.MiddleName + " " + recipient.LastName,
                     WhenSent = entity.WhenSent,
                     Subject = entity.Subject,
                     MessageText = entity.MessageText,
@@ -124,7 +127,8 @@ namespace Reminder.Services
         {
             using (var ctx = new ApplicationDbContext())
             {
-                var entity = ctx.Messages.Single(e => (e.Id == Id) && (Guid.Parse(e.Relationship.RelatedUserId) == _userId));
+                string userIdString = _userId.ToString("D");
+                var entity = ctx.Messages.Single(e => (e.Id == Id) && (e.Relationship.RelatedUserId == userIdString));
                 ctx.Messages.Remove(entity);
                 return (ctx.SaveChanges() == 1);
             }

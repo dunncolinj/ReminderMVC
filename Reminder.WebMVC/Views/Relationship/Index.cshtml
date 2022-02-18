@@ -12,7 +12,7 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.User)
+            @Html.DisplayNameFor(model => model.Id)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.RelatedUserId)
@@ -30,28 +30,28 @@
     </tr>
 
 @foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.User)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.RelatedUserId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.RelatedUserName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.HowRelated)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Connected)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.Id)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.RelatedUserId)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.RelatedUserName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.HowRelated)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Connected)
+    </td>
+    <td>
+        @Html.ActionLink("Update", "Update", new { id = item.Id }) |
+        @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+    </td>
+</tr>
 }
 
 </table>

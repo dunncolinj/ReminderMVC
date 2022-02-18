@@ -43,6 +43,8 @@ namespace Reminder.Services
                     .Select(
                     e => new EventList
                     {
+                        Id=e.Id,
+                        Name = e.Relationship.ApplicationUser.FirstName + " " + e.Relationship.ApplicationUser.MiddleName + " " + e.Relationship.ApplicationUser.LastName,
                         RelationshipId = e.RelationshipId,
                         Date = e.Date,
                         Description = e.Description,
@@ -56,13 +58,13 @@ namespace Reminder.Services
         {
             using (var ctx = new ApplicationDbContext())
             {
-                var entity = ctx.Events.Single(e => (e.Id == id) && (e.Relationship.User == _userId));
+                var entity = ctx.Events.Single(e => e.Id == id && e.Relationship.User == _userId);
 
                 return new EventDetails
                 {
                     Id = entity.Id,
                     RelationshipId = entity.RelationshipId,
-                    Name = (entity.Relationship.ApplicationUser.FirstName + " " + entity.Relationship.ApplicationUser.MiddleName + " " + entity.Relationship.ApplicationUser.LastName),
+                    Name = entity.Relationship.ApplicationUser.FirstName + " " + entity.Relationship.ApplicationUser.MiddleName + " " + entity.Relationship.ApplicationUser.LastName,
                     Date = entity.Date,
                     Description = entity.Description,
                     NotifyBefore = entity.NotifyBefore
@@ -81,7 +83,6 @@ namespace Reminder.Services
                 entity.NotifyBefore = model.NotifyBefore;
 
                 return (ctx.SaveChanges() == 1);
-
             }
         }
 

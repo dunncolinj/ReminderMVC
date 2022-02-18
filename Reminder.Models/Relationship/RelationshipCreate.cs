@@ -13,17 +13,10 @@ namespace Reminder.Models
 {
     public class RelationshipCreate
     {
-        public int Id { get; set; }
-        public Guid User { get; set; }
+        [Display(Name ="Related User ID")]
         public string RelatedUserId { get; set; }
-        public SelectListItem RelatedUserItem { get; set; }
-        // populate with name of related user based on related user ID
-        [Display(Name = "Name")]
-        public string RelatedUserName { get; set; }
+
         [Display(Name = "Relationship")]
         public RelationshipType HowRelated { get; set; }
-        [Display(Name = "Connected?")]
-        public bool Connected { get; set; }
-        public List<ApplicationUser> RelatedUsers { get; set; }
     }
 }

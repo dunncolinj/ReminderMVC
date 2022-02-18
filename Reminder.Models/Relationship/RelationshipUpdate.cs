@@ -11,7 +11,7 @@ namespace Reminder.Models
     public class RelationshipUpdate
     {
         public int Id { get; set; }
-        public Guid User { get; set; }
+//        public Guid User { get; set; }
         public string RelatedUserId { get; set; }
         // populate with name of related user based on related user ID
         [Display(Name = "Name")] 

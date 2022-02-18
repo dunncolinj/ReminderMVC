@@ -15,9 +15,6 @@ namespace Reminder.Models
         [DataType(DataType.Date)]
         [Display(Name = "Sent")]
         public DateTime WhenSent { get; set; }
-        // populate with name of recipient
-        [Display(Name = "To")]
-        public string RecipientName { get; set; }
         [Display(Name = "Subject")] 
         public string Subject { get; set; }
         [Display(Name = "Message Text")]

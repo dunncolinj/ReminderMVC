@@ -46,45 +46,36 @@ namespace Reminder.Services
             using (var ctx = new ApplicationDbContext())
             { 
 
-                var entity = new Relationship()
+                var entity1 = new Relationship()
                 {
                     // property = model.property
                     User = _userId,
                     RelatedUserId = model.RelatedUserId,
                     HowRelated = model.HowRelated,
-                    Connected = false
+                    Connected = true
                 };
 
-                ctx.Relationships.Add(entity);
-                return (ctx.SaveChanges() == 1);
-            }
-        }
+                var entity2 = new Relationship()
+                {
+                    User = Guid.Parse(model.RelatedUserId),
+                    RelatedUserId = _userId.ToString("D"),
+                    HowRelated = ReciprocalRelationship(model.HowRelated),
+                    Connected = true
+                };
 
-        public bool AcceptRelationship(int Id)
-        {
-            bool returnCode1 = false;
-
-            using (var ctx = new ApplicationDbContext())
-            {
-                var entity = ctx.Relationships.Single(e => e.Id == Id);
-                entity.Connected = true;
-                returnCode1 = (ctx.SaveChanges() == 1);
-                bool returnCode2 = CreateReciprocalRelationship(Id);
+                ctx.Relationships.Add(entity1);
+                bool returnCode1 = (ctx.SaveChanges() == 1);
+                ctx.Relationships.Add(entity2);
+                bool returnCode2 = (ctx.SaveChanges() == 1);
                 return (returnCode1 && returnCode2);
             }
         }
 
-        public bool CreateReciprocalRelationship(int Id)
+        public RelationshipType ReciprocalRelationship(RelationshipType howRelated)
         {
             RelationshipType ReciprocalRelationship = RelationshipType.colleague;
 
-            using (var ctx = new ApplicationDbContext())
-            {
-                var entity = ctx.Relationships.Single(e => e.Id == Id);
-                RelationshipType originalRelationship = entity.HowRelated;
-                string originalUser = entity.Id.ToString("D");
-
-                switch (originalRelationship)
+                switch (howRelated)
                 {
                     case RelationshipType.spouse:
                     case RelationshipType.significantOther:
@@ -92,7 +83,7 @@ namespace Reminder.Services
                     case RelationshipType.friend:
                     case RelationshipType.colleague:
                     case RelationshipType.sibling:
-                        ReciprocalRelationship = originalRelationship;
+                        ReciprocalRelationship = howRelated;
                         break;
                     case RelationshipType.grandparent:
                         ReciprocalRelationship = RelationshipType.grandchild;
@@ -113,17 +104,7 @@ namespace Reminder.Services
                         ReciprocalRelationship = RelationshipType.auntUncle;
                         break;
                 }
-                var newEntity = new Relationship()
-                {
-                    User = _userId,
-                    RelatedUserId = originalUser,
-                    HowRelated = ReciprocalRelationship,
-                    Connected = true
-                };
-
-                ctx.Relationships.Add(newEntity);
-                return (ctx.SaveChanges() == 1);
-            }
+            return ReciprocalRelationship;
         }
 
         public IEnumerable<RelationshipList> GetRelationships()
@@ -136,6 +117,7 @@ namespace Reminder.Services
                     .Select(
                     e => new RelationshipList
                     {
+                        Id = e.Id,
                         RelatedUserId = e.RelatedUserId,
                         RelatedUserName = e.ApplicationUser.FirstName + " " + e.ApplicationUser.MiddleName + " " + e.ApplicationUser.LastName,
                         HowRelated = e.HowRelated,
@@ -144,29 +126,6 @@ namespace Reminder.Services
                 return query.ToArray();
             }
         }
-
-        public IEnumerable<RelationshipList> GetRelationshipRequests()
-        {
-            using (var ctx = new ApplicationDbContext())
-            {
-                // query for all my relationship requests
-
-                string userIdString = _userId.ToString("D");
-
-                var query = ctx.Relationships.Where(e => e.RelatedUserId == userIdString)
-                    .Select(
-                    e => new RelationshipList
-                    {
-                        User = e.User,
-                        RelatedUserId = e.RelatedUserId,
-                        RelatedUserName = e.ApplicationUser.FirstName + " " + e.ApplicationUser.MiddleName + " " + e.ApplicationUser.LastName,
-                        HowRelated = e.HowRelated,
-                        Connected = e.Connected
-                    });
-                return query.ToArray();
-            }
-        }
-
 
         public RelationshipDetails GetRelationshipById(int id)
         {
@@ -202,10 +161,17 @@ namespace Reminder.Services
             using (var ctx = new ApplicationDbContext())
             {
 
-                var entity = ctx.Relationships.Single(e => e.Id == Id && e.User == _userId);
-                ctx.Relationships.Remove(entity);
-                return (ctx.SaveChanges() == 1);
-                // update reciprocal to delete
+                var entity1 = ctx.Relationships.Single(e => e.Id == Id && e.User == _userId);
+                string reciprocalUserId = entity1.RelatedUserId;
+                Guid reciprocalUserGuid = Guid.Parse(reciprocalUserId);
+                string reciprocalRelated = _userId.ToString("D");
+
+                var entity2 = ctx.Relationships.Single(e => e.User == reciprocalUserGuid && e.RelatedUserId == reciprocalRelated);
+
+                ctx.Relationships.Remove(entity1);
+                ctx.Relationships.Remove(entity2);
+
+                return (ctx.SaveChanges() == 2);
             }
         }
     }

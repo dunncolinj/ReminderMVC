@@ -57,9 +57,9 @@
     <Compile Include="Event.cs" />
     <Compile Include="IdentityModels.cs" />
     <Compile Include="Message.cs" />
-    <Compile Include="Migrations\202202110012133_InitialCreate.cs" />
-    <Compile Include="Migrations\202202110012133_InitialCreate.Designer.cs">
-      <DependentUpon>202202110012133_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\202202170132543_InitialMigration.cs" />
+    <Compile Include="Migrations\202202170132543_InitialMigration.Designer.cs">
+      <DependentUpon>202202170132543_InitialMigration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -70,8 +70,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202202110012133_InitialCreate.resx">
-      <DependentUpon>202202110012133_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202202170132543_InitialMigration.resx">
+      <DependentUpon>202202170132543_InitialMigration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
