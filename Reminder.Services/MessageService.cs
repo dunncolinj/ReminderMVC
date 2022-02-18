@@ -91,10 +91,6 @@ namespace Reminder.Services
         {
             using (var ctx = new ApplicationDbContext())
             {
-                DateTime? _timeStamp;
-
-                string userIdString = _userId.ToString("D");
-
                 var entity = ctx.Messages.Single(e => e.Id == id);
 
                 var sender = ctx.Users.Find(entity.Relationship.User.ToString("D"));
@@ -102,12 +98,12 @@ namespace Reminder.Services
 
                 if (entity.WhenRead == null)
                 {
-                    _timeStamp = DateTime.Now;
-                }
-                else {
-                    _timeStamp = entity.WhenRead;
+                    entity.WhenRead = DateTime.Now;
                 }
 
+                // save changes to update "when read" timestamp
+                ctx.SaveChanges();
+                
                 return new MessageDetails
                 {
                     // property = entity.property
@@ -118,7 +114,7 @@ namespace Reminder.Services
                     WhenSent = entity.WhenSent,
                     Subject = entity.Subject,
                     MessageText = entity.MessageText,
-                    WhenRead = _timeStamp
+                    WhenRead = entity.WhenRead
                 };
             }
         }
