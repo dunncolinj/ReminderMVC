@@ -30,7 +30,7 @@ h3 {
 }
 
 .btn {
-    border-radius: 10%;
+    border-radius: 7%;
 }
 
 th {
@@ -45,6 +45,26 @@ td {
     text-decoration: solid;
 }
 
+dt {
+    font-size: large;
+    font-weight: bold;
+}
+
+dd {
+    font-size: large;
+    font-style: italic;
+}
+
 table {
     table-layout: auto;
+}
+
+.jumbo-custom {
+    margin-bottom: 0px;
+    background-image: url('~/assets/messy-desk.jpg');
+    background-position: 0% 25%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: white;
+    text-shadow: black 0.3em 0.3em 0.3em;
 }
