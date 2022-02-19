@@ -34,11 +34,13 @@ h3 {
 }
 
 th {
+    font-size: larger;
     text-align: center;
     text-decoration: underline;
 }
 
 td {
+    font-size: large;
     text-align: center;
     text-decoration: solid;
 }
@@ -46,12 +48,3 @@ td {
 table {
     table-layout: auto;
 }
-
-th {
-    font-size: larger;
-}
-
-td {
-font-size: large;
-}
-
