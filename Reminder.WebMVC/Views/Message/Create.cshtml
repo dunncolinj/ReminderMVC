@@ -23,14 +23,6 @@
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.Subject, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Subject, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Subject, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
         @Html.LabelFor(model => model.WhenSent, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.EditorFor(model => model.WhenSent, new { htmlAttributes = new { @class = "form-control" } })
@@ -47,9 +39,17 @@
     </div>
 
     <div class="form-group">
+        @Html.LabelFor(model => model.Subject, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Subject, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Subject, "", new { @class = "text-danger", @placeholder="Subject...", @style = "Width: 800px; max-width: 800px;"  })
+        </div>
+    </div>
+
+    <div class="form-group">
         @Html.LabelFor(model => model.MessageText, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.MessageText, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.EditorFor(model => model.MessageText, new { htmlAttributes = new { @class = "form-control", @placeholder="Message text...", @style = "Width: 800px; max-width:800px; height: 400px;" } })
             @Html.ValidationMessageFor(model => model.MessageText, "", new { @class = "text-danger" })
         </div>
     </div>
